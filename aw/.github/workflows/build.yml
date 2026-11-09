@@ -1,0 +1,29 @@
+name: Build APK
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        name: Find project folder
+        run: echo "dir=$(dirname "$(find . -name pubspec.yaml -not -path '*/build/*' | head -1)")" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '17'}
+      - uses: subosito/flutter-action@v2
+        with: {channel: stable}
+      - run: flutter create . --platforms=android --project-name allowancewise --org com.allowancewise
+        working-directory: ${{ steps.p.outputs.dir }}
+      - run: flutter pub get
+        working-directory: ${{ steps.p.outputs.dir }}
+      - run: dart run flutter_launcher_icons
+        working-directory: ${{ steps.p.outputs.dir }}
+      - run: flutter build apk --release
+        working-directory: ${{ steps.p.outputs.dir }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: allowancewise-apk
+          path: ${{ steps.p.outputs.dir }}/build/app/outputs/flutter-apk/app-release.apk
