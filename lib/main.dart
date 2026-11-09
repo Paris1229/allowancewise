@@ -404,7 +404,7 @@ class _HomeState extends State<Home> {
         const SizedBox(height: 20),
         const Text(
           'This week by category',
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         for (final k in cats.keys)
@@ -446,7 +446,7 @@ class _HomeState extends State<Home> {
         const SizedBox(height: 20),
         const Text(
           'Recent expenses',
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 8),
         if (items.isEmpty)
@@ -649,16 +649,14 @@ class _HomeState extends State<Home> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Row(
           children: [
-            Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: amber,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                Icons.savings,
-                color: Theme.of(context).colorScheme.onPrimary,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/AllowanceWise_logo.png',
+                width: 36,
+                height: 36,
+                fit: BoxFit.cover,
+                semanticLabel: 'AllowanceWise logo',
               ),
             ),
             const SizedBox(width: 10),

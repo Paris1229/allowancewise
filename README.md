@@ -1,5 +1,7 @@
 # AllowanceWise
 
+![AllowanceWise logo](assets/AllowanceWise_logo_full.png)
+
 AllowanceWise is a Flutter app for tracking a weekly allowance and expenses. It
 stores data locally on the device and supports light and dark themes.
 
